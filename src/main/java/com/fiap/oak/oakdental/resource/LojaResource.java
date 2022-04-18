@@ -24,7 +24,7 @@ public class LojaResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Loja> findById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Loja> findById(@PathVariable("id") Long id) {
         Loja loja;
         try{
             loja = repository.findById(id).get();
@@ -49,7 +49,7 @@ public class LojaResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Loja> alter(@PathVariable("id") Integer id, @RequestBody Loja loja) {
+    public ResponseEntity<Loja> alter(@PathVariable("id") Long id, @RequestBody Loja loja) {
         Loja obj;
         try{
             obj = repository.findById(id).get();
@@ -66,8 +66,8 @@ public class LojaResource {
         return ResponseEntity.ok().body(obj);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         Loja loja;
         try{
             loja = repository.findById(id).get();

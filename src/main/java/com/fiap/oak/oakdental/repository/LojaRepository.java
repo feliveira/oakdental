@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LojaRepository  extends JpaRepository<Loja, Integer> {
+public interface LojaRepository  extends JpaRepository<Loja, Long> {
     List<Loja> findByNomeIgnoreCaseContaining(String nome);
 }

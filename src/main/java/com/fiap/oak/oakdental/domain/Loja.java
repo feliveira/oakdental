@@ -13,7 +13,7 @@ public class Loja implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String nome;
     private String path;
 
@@ -24,20 +24,20 @@ public class Loja implements Serializable {
 
     }
 
-    public Loja(Integer id, String nome, String path) {
+    public Loja(Long id, String nome, String path) {
         this.id = id;
         this.nome = nome;
         this.path = path;
     }
 
-    public Loja(Integer id, String nome, String path, List<Produto> produtos) {
+    public Loja(Long id, String nome, String path, List<Produto> produtos) {
         this.id = id;
         this.nome = nome;
         this.path = path;
         this.produtos = produtos;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

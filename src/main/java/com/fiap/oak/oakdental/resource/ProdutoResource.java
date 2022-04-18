@@ -24,7 +24,7 @@ public class ProdutoResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Produto> findById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Produto> findById(@PathVariable("id") Long id) {
         Produto prod;
         try{
             prod = repository.findById(id).get();
@@ -35,6 +35,12 @@ public class ProdutoResource {
         return ResponseEntity.ok().body(prod);
     }
 
+    @GetMapping("/findByNome/{nome}")
+    public ResponseEntity<List<Produto>> findByNomeContainingIgnoreCase(@PathVariable("nome") String nome) {
+        return ResponseEntity.ok().body(repository.findByNomeIgnoreCaseContaining(nome));
+
+    }
+
     @PostMapping
     public ResponseEntity<Produto> insert(@RequestBody Produto produto){
         produto = repository.save(produto);
@@ -43,7 +49,7 @@ public class ProdutoResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> alter(@PathVariable("id") Integer id, @RequestBody Produto prod) {
+    public ResponseEntity<Produto> alter(@PathVariable("id") Long id, @RequestBody Produto prod) {
         Produto obj;
         try{
             obj = repository.findById(id).get();
@@ -62,8 +68,8 @@ public class ProdutoResource {
         return ResponseEntity.ok().body(obj);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         Produto prod;
         try{
             prod = repository.findById(id).get();
@@ -74,6 +80,5 @@ public class ProdutoResource {
         repository.delete(prod);
         return ResponseEntity.noContent().build();
     }
-    
 
 }
