@@ -35,6 +35,12 @@ public class LojaResource {
         return ResponseEntity.ok().body(loja);
     }
 
+    @GetMapping("/findByNome/{nome}")
+    public ResponseEntity<List<Loja>> findByNomeContainingIgnoreCase(@PathVariable("nome") String nome) {
+        return ResponseEntity.ok().body(repository.findByNomeIgnoreCaseContaining(nome));
+
+    }
+
     @PostMapping
     public ResponseEntity<Loja> insert(@RequestBody Loja loja){
         loja = repository.save(loja);
