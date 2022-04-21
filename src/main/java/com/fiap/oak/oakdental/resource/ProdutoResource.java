@@ -38,7 +38,6 @@ public class ProdutoResource {
     @GetMapping("/findByNome/{nome}")
     public ResponseEntity<List<Produto>> findByNomeContainingIgnoreCase(@PathVariable("nome") String nome) {
         return ResponseEntity.ok().body(repository.findByNomeIgnoreCaseContaining(nome));
-
     }
 
     @PostMapping
@@ -57,14 +56,23 @@ public class ProdutoResource {
             return ResponseEntity.notFound().build();
         }
 
-        obj.setNome(prod.getNome());
-        obj.setDescricao(prod.getDescricao());
-        obj.setMarca(prod.getMarca());
-        obj.setValor(prod.getValor());
-        obj.setLoja(prod.getLoja());
+        if (prod.getNome() != null){
+            obj.setNome(prod.getNome());
+        }
+        if(prod.getDescricao() != null ) {
+            obj.setDescricao(prod.getDescricao());
+        }
+        if(prod.getMarca() != null) {
+            obj.setMarca(prod.getMarca());
+        }
+        if(prod.getValor() != null) {
+            obj.setValor(prod.getValor());
+        }
+        if(prod.getLoja() != null) {
+            obj.setLoja(prod.getLoja());
+        }
 
         repository.save(obj);
-
         return ResponseEntity.ok().body(obj);
     }
 
@@ -80,5 +88,4 @@ public class ProdutoResource {
         repository.delete(prod);
         return ResponseEntity.noContent().build();
     }
-
 }

@@ -38,7 +38,6 @@ public class LojaResource {
     @GetMapping("/findByNome/{nome}")
     public ResponseEntity<List<Loja>> findByNomeContainingIgnoreCase(@PathVariable("nome") String nome) {
         return ResponseEntity.ok().body(repository.findByNomeIgnoreCaseContaining(nome));
-
     }
 
     @PostMapping
@@ -57,12 +56,17 @@ public class LojaResource {
             return ResponseEntity.notFound().build();
         }
 
-        obj.setNome(loja.getNome());
-        obj.setPath(loja.getPath());
-        obj.getProdutos().clear();
-        obj.getProdutos().addAll(loja.getProdutos());
-        repository.save(obj);
+        if(loja.getNome() != null) {
+            obj.setNome(loja.getNome());
+        }
+        if(loja.getPath() != null){
+            obj.setPath(loja.getPath());
+        }
+        if(loja.getProdutos() != null) {
+            obj.getProdutos().addAll(loja.getProdutos());
+        }
 
+        repository.save(obj);
         return ResponseEntity.ok().body(obj);
     }
 
