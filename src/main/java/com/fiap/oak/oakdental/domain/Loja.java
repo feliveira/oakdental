@@ -2,8 +2,8 @@ package com.fiap.oak.oakdental.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "T_LOJA")
@@ -18,7 +18,7 @@ public class Loja implements Serializable {
     private String path;
 
     @OneToMany
-    private List<Produto> produtos = new ArrayList<>();
+    private Set<Produto> produtos = new HashSet<>();
 
     public Loja(){
 
@@ -28,13 +28,6 @@ public class Loja implements Serializable {
         this.id = id;
         this.nome = nome;
         this.path = path;
-    }
-
-    public Loja(Long id, String nome, String path, List<Produto> produtos) {
-        this.id = id;
-        this.nome = nome;
-        this.path = path;
-        this.produtos = produtos;
     }
 
     public Long getId() {
@@ -57,7 +50,7 @@ public class Loja implements Serializable {
         this.path = path;
     }
 
-    public List<Produto> getProdutos() {
+    public Set<Produto> getProdutos() {
         return produtos;
     }
 
@@ -69,5 +62,20 @@ public class Loja implements Serializable {
                 ", path='" + path + '\'' +
                 ", produtos=" + produtos +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Loja loja = (Loja) o;
+
+        return id.equals(loja.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

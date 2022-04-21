@@ -77,4 +77,19 @@ public class Produto implements Serializable {
     public void setLoja(Loja loja) {
         this.loja = loja;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Produto produto = (Produto) o;
+
+        return id.equals(produto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
